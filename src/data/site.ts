@@ -90,7 +90,22 @@ export const industries = [
   "Liquor",
 ] as const;
 
-export type NavItem = { label: string; to: string; children?: { label: string; to: string }[] };
+export type SitePath =
+  | "/"
+  | "/about"
+  | "/products"
+  | "/products/pet-bottles"
+  | "/products/pet-preforms"
+  | "/products/caps-closures"
+  | "/manufacturing-quality"
+  | "/resources/faq"
+  | "/resources/ask-the-expert"
+  | "/careers"
+  | "/contact"
+  | "/request-a-quote";
+
+export type NavLink = { label: string; to: SitePath };
+export type NavItem = NavLink & { children?: NavLink[] };
 
 export const mainNav: NavItem[] = [
   { label: "About", to: "/about" },

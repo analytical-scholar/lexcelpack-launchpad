@@ -1,3 +1,4 @@
+import type { NavLink } from "@/data/site";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ArrowRight, Clock } from "lucide-react";
@@ -6,7 +7,7 @@ interface PageHeroProps {
   eyebrow: string;
   title: string;
   intro: string;
-  crumbs?: { label: string; to: string }[];
+  crumbs?: NavLink[];
 }
 
 export function PageHero({ eyebrow, title, intro, crumbs }: PageHeroProps) {
@@ -51,8 +52,8 @@ export function NextStep({
 }: {
   title: string;
   text: string;
-  primary: { label: string; to: string };
-  secondary?: { label: string; to: string };
+  primary: NavLink;
+  secondary?: NavLink;
 }) {
   return (
     <section className="container-site py-14">

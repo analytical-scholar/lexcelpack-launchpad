@@ -1,21 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Printer } from "lucide-react";
-import { company, products, telHref } from "@/data/site";
+import { company, products, telHref, type NavLink } from "@/data/site";
 import { Logo } from "./Logo";
 
-const companyLinks = [
+const companyLinks: NavLink[] = [
   { label: "About", to: "/about" },
   { label: "Manufacturing & Quality", to: "/manufacturing-quality" },
   { label: "Careers", to: "/careers" },
   { label: "Contact", to: "/contact" },
 ];
-const resourceLinks = [
+const resourceLinks: NavLink[] = [
   { label: "FAQ", to: "/resources/faq" },
   { label: "Ask the Expert", to: "/resources/ask-the-expert" },
   { label: "Request a Quote", to: "/request-a-quote" },
 ];
 
-function Col({ title, links }: { title: string; links: { label: string; to: string }[] }) {
+function Col({ title, links }: { title: string; links: NavLink[] }) {
   return (
     <div>
       <h2 className="text-sm font-semibold text-navy-foreground">{title}</h2>
