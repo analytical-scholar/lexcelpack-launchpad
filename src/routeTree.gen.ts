@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as ProductsCapsClosuresRouteImport } from './routes/products.caps-closures'
+import { Route as ProductsPetBottlesRouteImport } from './routes/products.pet-bottles'
+import { Route as ProductsPetPreformsRouteImport } from './routes/products.pet-preforms'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsCapsClosuresRoute = ProductsCapsClosuresRouteImport.update({
+  id: '/products/caps-closures',
+  path: '/products/caps-closures',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsPetBottlesRoute = ProductsPetBottlesRouteImport.update({
+  id: '/products/pet-bottles',
+  path: '/products/pet-bottles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsPetPreformsRoute = ProductsPetPreformsRouteImport.update({
+  id: '/products/pet-preforms',
+  path: '/products/pet-preforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products/caps-closures': typeof ProductsCapsClosuresRoute
+  '/products/pet-bottles': typeof ProductsPetBottlesRoute
+  '/products/pet-preforms': typeof ProductsPetPreformsRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products/caps-closures': typeof ProductsCapsClosuresRoute
+  '/products/pet-bottles': typeof ProductsPetBottlesRoute
+  '/products/pet-preforms': typeof ProductsPetPreformsRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products/caps-closures': typeof ProductsCapsClosuresRoute
+  '/products/pet-bottles': typeof ProductsPetBottlesRoute
+  '/products/pet-preforms': typeof ProductsPetPreformsRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/products/caps-closures'
+    | '/products/pet-bottles'
+    | '/products/pet-preforms'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/products/caps-closures'
+    | '/products/pet-bottles'
+    | '/products/pet-preforms'
+    | '/products'
+  id:
+    | '__root__'
+    | '/'
+    | '/products/caps-closures'
+    | '/products/pet-bottles'
+    | '/products/pet-preforms'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsCapsClosuresRoute: typeof ProductsCapsClosuresRoute
+  ProductsPetBottlesRoute: typeof ProductsPetBottlesRoute
+  ProductsPetPreformsRoute: typeof ProductsPetPreformsRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/caps-closures': {
+      id: '/products/caps-closures'
+      path: '/products/caps-closures'
+      fullPath: '/products/caps-closures'
+      preLoaderRoute: typeof ProductsCapsClosuresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/pet-bottles': {
+      id: '/products/pet-bottles'
+      path: '/products/pet-bottles'
+      fullPath: '/products/pet-bottles'
+      preLoaderRoute: typeof ProductsPetBottlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/pet-preforms': {
+      id: '/products/pet-preforms'
+      path: '/products/pet-preforms'
+      fullPath: '/products/pet-preforms'
+      preLoaderRoute: typeof ProductsPetPreformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsCapsClosuresRoute: ProductsCapsClosuresRoute,
+  ProductsPetBottlesRoute: ProductsPetBottlesRoute,
+  ProductsPetPreformsRoute: ProductsPetPreformsRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
