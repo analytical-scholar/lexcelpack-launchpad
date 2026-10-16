@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsCapsClosuresRouteImport } from './routes/products.caps-closures'
 import { Route as ProductsPetBottlesRouteImport } from './routes/products.pet-bottles'
@@ -18,6 +19,11 @@ import { Route as ProductsPetPreformsRouteImport } from './routes/products.pet-p
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
@@ -43,6 +49,7 @@ const ProductsPetPreformsRoute = ProductsPetPreformsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/products/caps-closures': typeof ProductsCapsClosuresRoute
   '/products/pet-bottles': typeof ProductsPetBottlesRoute
   '/products/pet-preforms': typeof ProductsPetPreformsRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/products/caps-closures': typeof ProductsCapsClosuresRoute
   '/products/pet-bottles': typeof ProductsPetBottlesRoute
   '/products/pet-preforms': typeof ProductsPetPreformsRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/products/caps-closures': typeof ProductsCapsClosuresRoute
   '/products/pet-bottles': typeof ProductsPetBottlesRoute
   '/products/pet-preforms': typeof ProductsPetPreformsRoute
@@ -67,6 +76,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/products/caps-closures'
     | '/products/pet-bottles'
     | '/products/pet-preforms'
@@ -74,6 +84,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/products/caps-closures'
     | '/products/pet-bottles'
     | '/products/pet-preforms'
@@ -81,6 +92,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/products/caps-closures'
     | '/products/pet-bottles'
     | '/products/pet-preforms'
@@ -89,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ProductsCapsClosuresRoute: typeof ProductsCapsClosuresRoute
   ProductsPetBottlesRoute: typeof ProductsPetBottlesRoute
   ProductsPetPreformsRoute: typeof ProductsPetPreformsRoute
@@ -102,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/': {
@@ -137,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ProductsCapsClosuresRoute: ProductsCapsClosuresRoute,
   ProductsPetBottlesRoute: ProductsPetBottlesRoute,
   ProductsPetPreformsRoute: ProductsPetPreformsRoute,
